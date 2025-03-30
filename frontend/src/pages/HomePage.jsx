@@ -1,4 +1,45 @@
 import React from "react";
+import {
+  CleaningServices,
+  Inventory,
+  MeetingRoom,
+  RoomService,
+  LocalLaundryService,
+  DryCleaning,
+} from "@mui/icons-material";
+
+const services = [
+  {
+    title: "Room Cleaning",
+    description: "Assign & track room cleanliness.",
+    icon: <CleaningServices style={{ fontSize: 50, color: "blue" }} />,
+  },
+  {
+    title: "Linen Management",
+    description: "Monitor linen stock & condition.",
+    icon: <Inventory style={{ fontSize: 50, color: "green" }} />,
+  },
+  {
+    title: "Public Areas Cleaning",
+    description: "Maintain shared spaces.",
+    icon: <MeetingRoom style={{ fontSize: 50, color: "red" }} />,
+  },
+  {
+    title: "Special Services",
+    description: "Manage guest requests efficiently.",
+    icon: <RoomService style={{ fontSize: 50, color: "goldenrod" }} />,
+  },
+  {
+    title: "In-House Laundry",
+    description: "Track hotel-owned laundry.",
+    icon: <LocalLaundryService style={{ fontSize: 50, color: "purple" }} />,
+  },
+  {
+    title: "Guest Laundry Services",
+    description: "Provide seamless guest laundry.",
+    icon: <DryCleaning style={{ fontSize: 50, color: "orange" }} />,
+  },
+];
 
 const Home = () => {
   const scrollToSection = (id) => {
@@ -8,81 +49,80 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Navbar */}
-      <nav className="bg-[#2D336B] p-2 text-white text-center shadow-md h-16 items-center fixed top-0 left-0 w-full z-10">
+      <nav className="bg-[#2D336B] p-2 text-white shadow-md fixed top-0 left-0 w-full z-50">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center">
-            <img
-              src="/public/clean1.png"
-              alt="Hotel Management Logo"
-              className="h-12"
-            />
-          </div>
-          <ul className="flex space-x-6 item p-2 mr-8">
+          <img src="/clean1.png" alt="Hotel Logo" className="h-12" />
+
+          {/* Navigation Links */}
+          <ul className="hidden md:flex space-x-6">
             <li
-              className="hover:cursor-pointer"
+              className="cursor-pointer"
               onClick={() => scrollToSection("home-section")}
             >
               Home
             </li>
-            <li className="hover:cursor-pointer">Rooms</li>
             <li
-              className="hover:cursor-pointer"
+              className="cursor-pointer"
               onClick={() => scrollToSection("service-section")}
             >
               Services
             </li>
-            <li className="hover:cursor-pointer">Contact</li>
           </ul>
+
+          <div className="hidden md:flex space-x-4">
+            <button className="bg-white text-[#2D336B] px-4 py-2 rounded-md font-semibold hover:bg-gray-200 transition">
+              Sign Up
+            </button>
+            <button className="bg-[#4F709C] text-white px-4 py-2 rounded-md font-semibold hover:bg-[#8C96A5] transition">
+              Login
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button className="md:hidden text-white text-2xl">&#9776;</button>
         </div>
       </nav>
 
       {/* Hero Section */}
       <header
-        className="relative h-screen bg-cover bg-center text-[#2D336B] flex flex-col justify-center items-center"
-        style={{ backgroundImage: "url('/public/home.webp')" }}
+        className="relative h-screen bg-cover bg-center flex flex-col justify-center items-center text-white text-center"
+        style={{ backgroundImage: "url('/home.webp')" }}
         id="home-section"
       >
-        <div className="absolute inset-0 bg-white opacity-35"></div>
-
-        <div className="relative z-10 flex flex-col justify-center items-center px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold">
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="relative z-10 max-w-2xl">
+          <h2 className="text-4xl md:text-5xl font-bold mb-10">
             Effortless Housekeeping & Laundry Management
           </h2>
-          <p className="mt-4 text-lg max-w-2xl">
-            Streamline your hotel operations with our efficient system.
-          </p>
+          <a
+            href="#service-section"
+            className="mt-6 px-6 py-3 bg-[#2D336B] text-white rounded-lg text-lg font-semibold hover:bg-[#1C2148] transition"
+          >
+            Get Started
+          </a>
         </div>
       </header>
 
       {/* Services Section */}
-      <section
-        className="h-screen container mx-auto py-16 px-4"
-        id="service-section"
-      >
-        <h3 className="text-3xl font-bold text-center mb-8 mt-10">
+      <section className="container mx-auto py-16 px-6" id="service-section">
+        <h3 className="text-3xl font-bold text-center mb-20 mt-10">
           Our Services
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
-          <div className="bg-white p-6 shadow-md rounded-lg">
-            <h4 className="text-xl font-semibold">Room Cleaning</h4>
-            <p className="mt-2 text-gray-600">
-              Monitor room cleanliness and assign staff easily.
-            </p>
-          </div>
-          <div className="bg-white p-6 shadow-md rounded-lg">
-            <h4 className="text-xl font-semibold">Linen Management</h4>
-            <p className="mt-2 text-gray-600">
-              Track linen inventory and ensure quality service.
-            </p>
-          </div>
-          <div className="bg-white p-6 shadow-md rounded-lg">
-            <h4 className="text-xl font-semibold">Guest Laundry</h4>
-            <p className="mt-2 text-gray-600">
-              Provide seamless laundry services to guests.
-            </p>
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+          {services.map((service, index) => (
+            <div
+              key={index}
+              className="bg-white p-6 shadow-md rounded-lg text-center flex flex-col items-center 
+            hover:shadow-lg transition transform hover:-translate-y-1 cursor-pointer bg-gradient-to-br from-[#F4F4F4] to-[#8C96A5]"
+            >
+              {service.icon}
+              <h4 className="text-xl font-semibold mt-4">{service.title}</h4>
+              <p className="mt-2 text-gray-600">{service.description}</p>
+            </div>
+          ))}
         </div>
       </section>
+
 
       {/* Footer */}
       <footer className="bg-[#2D336B] text-white text-center py-6">
